@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
                 </button>
                 
                 <a
-                  href="https://instagram.com/nuqta_nuqta_raqmiya"
+                  href="https://instagram.com/nuqta_raqmiya"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-lg flex items-center justify-center transition-colors"
