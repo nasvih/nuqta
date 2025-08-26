@@ -13,36 +13,70 @@ const Contact: React.FC = () => {
     budget: '',
     message: '',
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // This function now handles the email redirection
+  const handleSendEmail = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    const { name, phone, whatsapp, email, service, budget, message } = formData;
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      alert(isRTL ? 'تم إرسال رسالتك بنجاح!' : 'Message sent successfully!');
-      setFormData({
-        name: '',
-        phone: '',
-        whatsapp: '',
-        email: '',
-        service: '',
-        budget: '',
-        message: '',
-      });
-    }, 2000);
+    // Find the readable labels for service and budget
+    const serviceLabel = serviceOptions.find(opt => opt.value === service)?.label || service;
+    const budgetLabel = budgetOptions.find(opt => opt.value === budget)?.label || budget;
+
+    const subject = isRTL 
+      ? `استفسار مشروع جديد من ${name}` 
+      : `New Project Inquiry from ${name}`;
+      
+    const body = `
+      ${isRTL ? 'مرحباً نقطة رقمية،' : 'Hello Nuqta Digital,'}
+
+      ${isRTL ? 'أود الاستفسار عن مشروع جديد. وهذه تفاصيلي:' : 'I would like to inquire about a new project. Here are my details:'}
+
+      ----------------------------------------
+      ${isRTL ? 'الاسم الكامل:' : 'Full Name:'} ${name}
+      ${isRTL ? 'رقم الجوال:' : 'Phone Number:'} ${phone}
+      ${isRTL ? 'واتساب:' : 'WhatsApp:'} ${whatsapp || (isRTL ? 'لم يحدد' : 'Not provided')}
+      ${isRTL ? 'البريد الإلكتروني:' : 'Email Address:'} ${email || (isRTL ? 'لم يحدد' : 'Not provided')}
+      ----------------------------------------
+      ${isRTL ? 'نوع الخدمة:' : 'Service Required:'} ${serviceLabel}
+      ${isRTL ? 'الميزانية التقريبية:' : 'Approximate Budget:'} ${budgetLabel || (isRTL ? 'لم يحدد' : 'Not provided')}
+      ----------------------------------------
+      ${isRTL ? 'تفاصيل المشروع:' : 'Project Details:'}
+      ${message || (isRTL ? 'لا يوجد' : 'None')}
+      ----------------------------------------
+    `;
+
+    // Create and trigger the mailto link
+    const mailtoLink = `mailto:${content.contact.info.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
   };
 
+  // This function now includes all form data for WhatsApp
   const handleWhatsApp = () => {
-    const message = `مرحبا، أود الاستفسار عن خدماتكم الرقمية.\n\nالاسم: ${formData.name}\nنوع الخدمة: ${formData.service}\nالميزانية: ${formData.budget}\nالتفاصيل: ${formData.message}`;
-    window.open(`https://wa.me/+919539966671?text=${encodeURIComponent(message)}`, '_blank');
+    const { name, phone, whatsapp, email, service, budget, message } = formData;
+    
+    // Find the readable labels for service and budget
+    const serviceLabel = serviceOptions.find(opt => opt.value === service)?.label || service;
+    const budgetLabel = budgetOptions.find(opt => opt.value === budget)?.label || budget;
+
+    const fullMessage = `
+*${isRTL ? 'استفسار مشروع جديد' : 'New Project Inquiry'}*
+-------------------
+*${isRTL ? 'الاسم الكامل:' : 'Full Name:'}* ${name || 'N/A'}
+*${isRTL ? 'رقم الجوال:' : 'Phone Number:'}* ${phone || 'N/A'}
+*${isRTL ? 'واتساب:' : 'WhatsApp:'}* ${whatsapp || 'N/A'}
+*${isRTL ? 'البريد الإلكتروني:' : 'Email Address:'}* ${email || 'N/A'}
+*${isRTL ? 'نوع الخدمة:' : 'Service Required:'}* ${serviceLabel || 'N/A'}
+*${isRTL ? 'الميزانية التقريبية:' : 'Approximate Budget:'}* ${budgetLabel || 'N/A'}
+*${isRTL ? 'تفاصيل المشروع:' : 'Project Details:'}*
+${message || 'N/A'}
+    `;
+    window.open(`https://wa.me/${content.contact.info.phone.replace(/\s/g, '')}?text=${encodeURIComponent(fullMessage)}`, '_blank');
   };
 
   const serviceOptions = [
@@ -87,7 +121,7 @@ const Contact: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSendEmail} className="space-y-6">
                 {/* Name */}
                 <div>
                   <label 
@@ -233,18 +267,11 @@ const Contact: React.FC = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                   <button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white px-6 py-4 rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+                    className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-4 rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
                     style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Montserrat, sans-serif' }}
                   >
-                    {isSubmitting ? (
-                      <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
-                    ) : (
-                      <>
-                        <Send size={20} />
-                        <span>{content.contact.form.submit}</span>
-                      </>
-                    )}
+                    <Send size={20} />
+                    <span>{content.contact.form.submit}</span>
                   </button>
                   
                   <button
@@ -356,43 +383,6 @@ const Contact: React.FC = () => {
                       </a>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Quick Contact */}
-              <div className="bg-gradient-to-r from-primary-50 to-amber-50 rounded-3xl p-8 text-center">
-                <h3 
-                  className="text-2xl font-bold text-navy-900 mb-4"
-                  style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Montserrat, sans-serif' }}
-                >
-                  {isRTL ? 'تواصل سريع' : 'Quick Contact'}
-                </h3>
-                
-                <p 
-                  className="text-navy-600 mb-6"
-                  style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Montserrat, sans-serif' }}
-                >
-                  {isRTL ? 'للاستفسارات السريعة أو المساعدة الفورية' : 'For quick inquiries or immediate assistance'}
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button
-                    onClick={() => window.open('https://wa.me/+919539966671', '_blank')}
-                    className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
-                    style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Montserrat, sans-serif' }}
-                  >
-                    <MessageCircle size={20} />
-                    <span>WhatsApp</span>
-                  </button>
-                  
-                  <button
-                    onClick={() => window.open('tel:+919539966671', '_blank')}
-                    className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
-                    style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Montserrat, sans-serif' }}
-                  >
-                    <Phone size={20} />
-                    <span>{isRTL ? 'اتصال' : 'Call'}</span>
-                  </button>
                 </div>
               </div>
             </div>

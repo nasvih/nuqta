@@ -394,7 +394,7 @@ export const englishContent: Content = {
     viewWork: 'View Work',
     contactUs: 'Contact Us',
     readMore: 'Read More',
-    sendMessage: 'Send Message',
+    sendMessage: 'Send Mail',
   },
   hero: {
     title: 'Nuqta Digital',
@@ -613,7 +613,6 @@ export const englishContent: Content = {
       service: 'Service Type',
       budget: 'Approximate Budget',
       message: 'Project Details',
-      submit: 'Send Message',
     },
     info: {
       address: 'Makkah, Saudi Arabia',
