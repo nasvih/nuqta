@@ -5,43 +5,91 @@ import { useLanguage } from '../context/LanguageContext';
 const Portfolio: React.FC = () => {
   const { content, isRTL } = useLanguage();
 
-  // Portfolio items with placeholder data
+  // Portfolio items with your real projects
   const portfolioItems = [
     {
-      title: isRTL ? 'مطعم الأصالة' : 'Asala Restaurant',
-      category: isRTL ? 'موقع + منيو رقمي' : 'Website + Digital Menu',
-      image: 'https://images.pexels.com/photos/1581384/pexels-photo-1581384.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: isRTL ? 'موقع احترافي مع منيو رقمي تفاعلي' : 'Professional website with interactive digital menu'
+      title: isRTL ? 'موقع نسڤيه التقني' : 'Tech Portfolio',
+      category: isRTL ? 'موقع شخصي' : 'Personal Portfolio',
+      image: 'https://images.pexels.com/photos/577210/pexels-photo-577210.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: isRTL ? 'موقعي الشخصي لعرض خدماتي ومشاريعي' : 'Personal portfolio showcasing services and projects',
+      link: 'https://www.nasvih.tech'
     },
     {
-      title: isRTL ? 'متجر الموضة' : 'Fashion Store',
-      category: isRTL ? 'تصاميم رقمية' : 'Digital Designs',
-      image: 'https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: isRTL ? 'تصاميم إنستغرام احترافية' : 'Professional Instagram designs'
-    },
-    {
-      title: isRTL ? 'شركة الخدمات' : 'Services Company',
-      category: isRTL ? 'موقع شركة' : 'Company Website',
-      image: 'https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: isRTL ? 'موقع شركة مع ملف Google Business' : 'Company website with Google Business profile'
-    },
-    {
-      title: isRTL ? 'مقهى الثقافة' : 'Culture Cafe',
-      category: isRTL ? 'منيو + إعلانات' : 'Menu + Ads',
-      image: 'https://images.pexels.com/photos/1307698/pexels-photo-1307698.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: isRTL ? 'منيو رقمي مع حملات ميتا' : 'Digital menu with Meta campaigns'
-    },
-    {
-      title: isRTL ? 'عيادة طبية' : 'Medical Clinic',
-      category: isRTL ? 'موقع + Google Business' : 'Website + Google Business',
+      title: isRTL ? 'هيد اند هيل' : 'Heed n Heal',
+      category: isRTL ? 'موقع عيادة + تطبيق' : 'Clinic Website + App',
       image: 'https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: isRTL ? 'موقع عيادة مع ملف أعمال محسن' : 'Clinic website with optimized business profile'
+      description: isRTL ? 'موقع عيادة مع نظام حجز مواعيد' : 'Clinic website with appointment booking system',
+      link: 'https://heednheal.com'
     },
     {
-      title: isRTL ? 'متجر إلكترونيات' : 'Electronics Store',
-      category: isRTL ? 'تصاميم + إعلانات' : 'Designs + Ads',
-      image: 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: isRTL ? 'تصاميم وحملات إعلانية فعّالة' : 'Effective designs and ad campaigns'
+      title: isRTL ? 'واين ديز' : 'Wayndays',
+      category: isRTL ? 'موقع أعمال' : 'Business Website',
+      image: 'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: isRTL ? 'موقع أعمال احترافي' : 'Professional business website',
+      link: 'https://wayndays.com'
+    },
+    {
+      title: isRTL ? 'بوتشكو' : 'Poochkoo',
+      category: isRTL ? 'موقع رعاية حيوانات' : 'Pet Care Website',
+      image: 'https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: isRTL ? 'موقع متخصص في رعاية الحيوانات الأليفة' : 'Specialized pet care website',
+      link: 'https://poochkoo.com'
+    },
+    {
+      title: isRTL ? 'سيفير أوكس للحيوانات الأليفة' : 'Sevenoaks Pet',
+      category: isRTL ? 'موقع رعاية حيوانات' : 'Pet Care Website',
+      image: 'https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: isRTL ? 'موقع متكامل للعناية بالحيوانات الأليفة' : 'Comprehensive pet care website',
+      link: 'https://sevenoakspet.in'
+    },
+    {
+      title: isRTL ? 'ظلال الطبيعية' : 'Dhalanaturals',
+      category: isRTL ? 'موقع صحة وعافية' : 'Wellness Website',
+      image: 'https://images.pexels.com/photos/3768004/pexels-photo-3768004.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: isRTL ? 'موقع منتجات صحية وطبيعية' : 'Natural health products website',
+      link: 'https://dhalanaturals.com'
+    },
+    {
+      title: isRTL ? 'بليسفل' : 'Blissful',
+      category: isRTL ? 'منصة مشاركة قصص' : 'Story Sharing Platform',
+      image: 'https://images.pexels.com/photos/733856/pexels-photo-733856.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: isRTL ? 'منصة لمشاركة القصص والتجارب' : 'Platform for sharing stories and experiences',
+      link: 'https://blissful.help'
+    },
+    {
+      title: isRTL ? 'إف تو إس الدولية' : 'F2S International',
+      category: isRTL ? 'استشارات تعليمية' : 'Educational Consultancy',
+      image: 'https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: isRTL ? 'موقع استشارات تعليمية دولية' : 'International educational consultancy website',
+      link: 'https://f2sinternational.com'
+    },
+    {
+      title: isRTL ? 'الاستوديو الخيالي' : 'The Whimsical Studio',
+      category: isRTL ? 'هندسة معمارية' : 'Architecture',
+      image: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: isRTL ? 'موقع استوديو للهندسة المعمارية' : 'Architecture studio website',
+      link: 'https://thewhimsicalstudio.co'
+    },
+    {
+      title: isRTL ? 'فروتي الرودا' : 'Fruity Al Rawda',
+      category: isRTL ? 'مقهى + قائمة رقمية' : 'Cafe + Digital Menu',
+      image: 'https://images.pexels.com/photos/2059/restaurant-red-beans-coffee.jpg?auto=compress&cs=tinysrgb&w=800',
+      description: isRTL ? 'موقع مقهى مع قائمة رقمية تفاعلية' : 'Cafe website with interactive digital menu',
+      link: 'https://fruityalrawda.shop'
+    },
+    {
+      title: isRTL ? 'تيك سوب' : 'TechSube',
+      category: isRTL ? 'موقع شركة ناشئة' : 'Startup Website',
+      image: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: isRTL ? 'موقع لشركة ناشئة في مجال التقنية' : 'Website for a tech startup',
+      link: 'https://techsube.netlify.app'
+    },
+    {
+      title: isRTL ? 'منتجات رقمية' : 'Digital Products',
+      category: isRTL ? 'تصاميم وبوسترات' : 'Designs & Posters',
+      image: 'https://images.pexels.com/photos/3568520/pexels-photo-3568520.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: isRTL ? 'تصاميم رقمية، بوسترات، بروشورات، سير ذاتية' : 'Digital designs, posters, brochures, resumes',
+      link: 'https://www.instagram.com/nuqta_raqmiya'
     }
   ];
 
@@ -68,9 +116,12 @@ const Portfolio: React.FC = () => {
           {/* Portfolio Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item, index) => (
-              <div
+              <a
                 key={index}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group cursor-pointer"
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group cursor-pointer block"
               >
                 {/* Image */}
                 <div className="relative overflow-hidden h-48">
@@ -112,7 +163,7 @@ const Portfolio: React.FC = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
 
